@@ -2,38 +2,74 @@
 html, body {
     margin: 0px;
     padding: 0px;
+
     background-color: gray;
 }
 
 /* NAVIGATION-BAR */
-#weather-navbar {
-    width: 100%;
+#wthr-nav {
     display: flex;
-    height: 0 auto;
-    margin: 0px;
-    padding: 0px
-}
 
-#weather-navbar-title {
-    text-align: left;
     margin: 0px;
     padding: 0px;
-    width: 50%;
+
+    width: 100%;
+    height: 0 auto;
 }
 
-#weather-navbar-right {
+#wthr-nav-title {
+    margin: 0px;
+    padding: 0px;
+
+    text-align: left;
+    width: 70%;
+}
+
+#wthr-nav-right {
     display: flex;
+
     margin: auto;
     padding: 0px;
-    width: 50%;
+
+    width: 30%;
 }
 
-.weather-navbar-element {
+.wthr-nav-element {
     display: inline-block;
+
     width: 50%;
     margin: 0px;
+
     padding: 0px
 }
 
+
 /* CONTENT */
+
+#wcont {
+}
+
+#wcont-title {
+}
+
+#wcont-main {
+    display: flex;
+}
+
+.wcont-el {
+    display: inline-block;
+    width: 100%;
+}
+
+.wcont-el-title {
+}
+
+.wcont-card {
+}
+
+.wcont-card-title {
+}
+
+.wcont-card-temp {
+}
 
