@@ -7,11 +7,6 @@
 
 //'https://api.open-meteo.com/v1/forecast?latitude=39.62&longitude=-86.16&hourly=temperature_2m');
 
-//function temp_extract(some_json) {
-//    
-//}
-
-
 // Integar to string with padding
 function padstr(mint, digs=2, padding="0") {
     d=1; z=10;
@@ -24,18 +19,31 @@ function padstr(mint, digs=2, padding="0") {
 function day_average_temp(day, timesg, tempsg) { 
     console.log("day_average_temp");
 
-    let str_day = day[0].toString() + "-" + day[1].toString() + "-" + day[2].toString() + "T01:00";
+    let str_day = day[0].toString() + "-" + 
+                  day[1].toString() + "-" + 
+                  day[2].toString() + "T00:00";
+
     let ind = timesg.indexOf(str_day);
-    let temp_sum = tempsg.slice(ind, ind + 24);
-    console.log(ind);
-    console.log(timesg[ind]);
+    let temp_slice = tempsg.slice(ind, ind + 24)
+    //let time_slice = timesg.slice(ind, ind + 24);
+    let temp_avg = temp_slice.reduce((x, y) => x + y);
+    return (parseFloat(temp_avg) / 24.0);
 }
 
 function get_temp() {
     console.log("get_temp.");
 
     let mtemp = null;
-    let murl='https://api.open-meteo.com/v1/forecast?latitude=39.6329&longitude=-86.1655&hourly=temperature_2m&current_weather=true&start_date=2022-12-01&end_date=2022-12-26';
+
+    let murl='https://'           + 
+             'api.open-meteo.com' +   '/v1/forecast' +
+             '?latitude='         +        '39.6329' + 
+             '&longitude='        +       '-86.1655' +
+             '&hourly='           + 'temperature_2m' + 
+             '&current_weather='  +           'true' +
+             '&start_date='       +     '2022-12-01' + 
+             '&end_date='         +     '2022-12-26' ;
+
     let req = new XMLHttpRequest();
 
     req.open(method="GET", 
@@ -48,7 +56,8 @@ function get_temp() {
         let jsong = JSON.parse(this.responseText);
         let timesg = jsong["hourly"]["time"];
         let tempsg = jsong["hourly"]["temperature_2m"];
-        day_average_temp([2022, 12, 25], timesg, tempsg);
+        let a = day_average_temp([2022, 12, 25], timesg, tempsg);
+        console.log(a);
         return 0;
     };
 
