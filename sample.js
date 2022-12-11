@@ -1,3 +1,4 @@
+
 //{"latitude":39.632927,"longitude":-86.16553,"generationtime_ms":0.7469654083251953,"utc_offset_seconds":0,"timezone":"GMT","timezone_abbreviation":"GMT","elevation":221.0,"current_weather":{"temperature":5.4,"windspeed":8.2,"winddirection":299.0,"weathercode":3,"time":"2022-12-11T18:00"}
 
 //"hourly_units":{"time":"iso8601","temperature_2m":"°C"}
@@ -8,6 +9,9 @@
 //'https://api.open-meteo.com/v1/forecast?latitude=39.62&longitude=-86.16&hourly=temperature_2m');
 
 // Integar to string with padding
+var week_map = {"Sunday"  : 0, "Monday": 1, "Tuesday" : 2, "Wednesday": 3, 
+                "Thursday": 4, "Friday": 5, "Saturday": 6};
+
 function padstr(mint, digs=2, padding="0") {
     d=1; z=10;
     while ( ( mint / z ) > 0) {
@@ -18,7 +22,7 @@ function padstr(mint, digs=2, padding="0") {
 
 function day_average_temp(day, timesg, tempsg) { 
     console.log("day_average_temp");
-
+    //--------------------//
     let str_day = day[0].toString() + "-" + 
                   day[1].toString() + "-" + 
                   day[2].toString() + "T00:00";
@@ -30,46 +34,43 @@ function day_average_temp(day, timesg, tempsg) {
     return (parseFloat(temp_avg) / 24.0);
 }
 
-function get_temp() {
-    console.log("get_temp.");
+function get_next_weekdays(current_date) {
+    let weekdays = {"Monday": null, "Tuesday": null, "Wednesday": null, "Thursday": null, "Friday": null};
+    return 0;
+}
 
-    let mtemp = null;
+function temp_in_html(timesg, tempsg) {
+    console.log("temp_in_html");
+    //--------------------//
+    let avg_d25 = day_average_temp([2022, 12, 12], timesg, tempsg);
+    let monday = document.getElementById("weather-monday");
+    monday.innerText = Math.round(avg_d25);
+}
 
+function main() {
+    console.log("get_temp");
+    //--------------------//
     let murl='https://'           + 
              'api.open-meteo.com' +   '/v1/forecast' +
              '?latitude='         +        '39.6329' + 
              '&longitude='        +       '-86.1655' +
              '&hourly='           + 'temperature_2m' + 
-             '&current_weather='  +           'true' +
-             '&start_date='       +     '2022-12-01' + 
-             '&end_date='         +     '2022-12-26' ;
+             '&current_weather='  +           'true';
 
     let req = new XMLHttpRequest();
 
-    req.open(method="GET", 
-                URL=murl, 
-              ASYNC=true);
+    req.open(method="GET", URL=murl, ASYNC=true);
 
     req.onload = function() {
-        console.log("XML onload.");
-
+        console.log("XML onload");
+        //--------------------//
         let jsong = JSON.parse(this.responseText);
         let timesg = jsong["hourly"]["time"];
         let tempsg = jsong["hourly"]["temperature_2m"];
-        let a = day_average_temp([2022, 12, 25], timesg, tempsg);
-        console.log(a);
-        return 0;
+        temp_in_html(timesg, tempsg);
     };
 
     req.send();
-
-    return mtemp;
-}
-
-function main() {
-    console.log("main");
-
-    get_temp();
 }
 
 document.addEventListener("DOMContentLoaded", main);
