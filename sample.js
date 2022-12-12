@@ -1,6 +1,5 @@
 
 //{"latitude":39.632927,"longitude":-86.16553,"generationtime_ms":0.7469654083251953,"utc_offset_seconds":0,"timezone":"GMT","timezone_abbreviation":"GMT","elevation":221.0,"current_weather":{"temperature":5.4,"windspeed":8.2,"winddirection":299.0,"weathercode":3,"time":"2022-12-11T18:00"}
-
 //"hourly_units":{"time":"iso8601","temperature_2m":"°C"}
 //"hourly":{"time":["2022-12-04T01:00","2022-12-04T02:00","2022-12-04T03:00","2022-12-04T04:00","2022-12-04T05:00","2022-12-04T06:00","2022-12-04T07:00","2022-12-04T08:00","2022-12-04T09:00","2022-12-04T10:00","2022-12-04T11:00","2022-12-04T12:00","2022-12-04T13:00","2022-12-04T14:00","2022-12-04T15:00","2022-12-04T16:00","2022-12-04T17:00","2022-12-04T18:00","2022-12-04T19:00","2022-12-04T20:00",
 //"2022-12-04T21:00","2022-12-04T22:00","2022-12-04T23:00","2022-12-05T00:00","2022-12-05T01:00","2022-12-05T02:00","2022-12-05T03:00","2022-12-05T04:00","2022-12-05T05:00","2022-12-05T06:00","2022-12-05T07:00","2022-12-05T08:00","2022-12-05T09:00","2022-12-05T10:00","2022-12-05T11:00","2022-12-05T12:00","2022-12-05T13:00","2022-12-05T14:00","2022-12-05T15:00","2022-12-05T16:00",
@@ -55,19 +54,27 @@ function make_temp_obj(timesg, tempsg) {
     return new_object;
 }
 
+function reg_text_insert(day, value) {
+    const comp = '[id*=' + day + ']';
+    const elm = document.querySelector(comp);
+    elm.innerText = value;
+}
+
 function temp_in_html(timesg, tempsg) {
     let weekdays = {1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday"};
     let weekends = {"Sundays": 0, "Saturdays": 6};
     let newbie_folk = {"Monday": null, "Tuesday": null, "Wednesday": null, "Thursday": null, "Friday": null};
 
-
     let temp_obj = make_temp_obj(timesg, tempsg);
 
     for (let key in temp_obj) {
+
         let c_date = new Date(key);
         let day_num = c_date.getDay();
+
         if (day_num in weekdays) {
             newbie_folk[weekdays[day_num]] = {"Average": get_average(temp_obj[key]), "Temps": temp_obj[key]};
+            reg_text_insert(weekdays[day_num].toLowerCase(), Math.round(newbie_folk[weekdays[day_num]]["Average"]));
         }
     }
 
@@ -77,12 +84,15 @@ function temp_in_html(timesg, tempsg) {
 }
 
 function main() {
-    let murl='https://'           + 
-             'api.open-meteo.com' +   '/v1/forecast' +
-             '?latitude='         +        '39.6329' + 
-             '&longitude='        +       '-86.1655' +
-             '&hourly='           + 'temperature_2m' + 
-             '&current_weather='  +           'true';
+
+    const latit =  '39.6329'
+    const longi = '-86.1655'
+    //          protocol     domain                 suburl
+    let murl = 'https://' + 'api.open-meteo.com' + '/v1/forecast' +
+               '?latitude='         +           latit  +
+               '&longitude='        +           longi  +
+               '&hourly='           + 'temperature_2m' + 
+               '&current_weather='  +           'true' ;
 
     let req = new XMLHttpRequest();
 
