@@ -4,17 +4,27 @@ html, body {
     padding: 0px;
 
     background-color: white;
+    font-family: sans-serif !important;
+}
+
+* {
+    font-weight: normal; 
 }
 
 #wcont {
     display: flex;
-    flex-direction: column;
     flex: 1;
-    padding: 5%;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    padding: 10px 20px 10px 20px;
 }
 
 #wthr-nav {
     display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     margin: 0px;
     padding: 0px;
@@ -25,6 +35,10 @@ html, body {
 
 #wcont-main {
     display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+
     width: 100%;
 }
 
@@ -39,6 +53,9 @@ html, body {
 
 #wthr-nav-right {
     display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     margin: auto;
     padding: 0px;
@@ -47,25 +64,30 @@ html, body {
 }
 
 .wthr-nav-element {
-    display: inline-block;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
 
     width: 50%;
     margin: 0px;
 
-    padding: 0px
+    padding: 0px;
 }
 
+#wthr-nav-right .wthr-nav-element {
+    justify-content: right;
+}
 
 /* CONTENT */
-
-
 
 #wcont-title {
 }
 
 .wcont-el {
-    display: inline-block;
-    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .wcont-el-title {
@@ -73,6 +95,7 @@ html, body {
 
 .wcont-card {
     text-align: center;
+    border-radius: 20px;
 }
 
 .wcont-card-title {

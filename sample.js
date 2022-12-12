@@ -84,7 +84,7 @@ function temp_in_html() {
         if (day_num in weekdays) {
             const avr = get_average(tnum);
             const rnded = Math.round(avr);
-            const col = rnded > 2 ? "Yellow" : "Blue";
+            const col = rnded > 2 ? "#FFC600" : "#3399FF";
 
             newbie_folk[weekdays[day_num]] = {"Average": avr, "Temps": tnum};
             reg_text_insert(weekdays[day_num].toLowerCase(), rnded.toString() + '&#176;', col); 
