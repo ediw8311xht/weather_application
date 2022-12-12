@@ -20,18 +20,6 @@ html, body {
     padding: 10px 20px 10px 20px;
 }
 
-#wthr-nav {
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    margin: 0px;
-    padding: 0px;
-
-    width: 100%;
-    height: 0 auto;
-}
 
 #wcont-main {
     display: flex;
@@ -43,24 +31,32 @@ html, body {
 }
 
 /* NAVIGATION-BAR */
+#wthr-nav {
+    display: flex;
+    flex: 3 2 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin: 0px;
+    padding: 0px;
+
+    width: 100%;
+    height: 0 auto;
+}
 #wthr-nav-title {
     margin: 0px;
     padding: 0px;
 
     text-align: left;
-    width: 70%;
 }
 
 #wthr-nav-right {
     display: flex;
-    flex: 1;
     flex-direction: row;
     flex-wrap: wrap;
 
     margin: auto;
     padding: 0px;
-
-    width: 30%;
 }
 
 .wthr-nav-element {
@@ -88,6 +84,7 @@ html, body {
     flex: 1;
     flex-direction: column;
     flex-wrap: wrap;
+    margin: 20px;
 }
 
 .wcont-el-title {
@@ -96,6 +93,7 @@ html, body {
 .wcont-card {
     text-align: center;
     border-radius: 20px;
+    box-shadow: 1px 5px 5px 5px #000000;
 }
 
 .wcont-card-title {
