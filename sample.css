@@ -6,7 +6,13 @@ html, body {
     background-color: white;
 }
 
-/* NAVIGATION-BAR */
+#wcont {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 5%;
+}
+
 #wthr-nav {
     display: flex;
 
@@ -17,6 +23,12 @@ html, body {
     height: 0 auto;
 }
 
+#wcont-main {
+    display: flex;
+    width: 100%;
+}
+
+/* NAVIGATION-BAR */
 #wthr-nav-title {
     margin: 0px;
     padding: 0px;
@@ -46,14 +58,9 @@ html, body {
 
 /* CONTENT */
 
-#wcont {
-}
+
 
 #wcont-title {
-}
-
-#wcont-main {
-    display: flex;
 }
 
 .wcont-el {
@@ -73,4 +80,50 @@ html, body {
 
 .wcont-card-temp {
 }
+
+
+/*
+#wthr-nav
+
+    #wthr-nav-right
+    
+    .wthr-nav-element
+
+#wcont"
+
+    #wcont-title
+    
+    #wcont-main
+    
+    .wcont-el
+    
+    .wcont-el-title
+    
+    .wcont-card
+    
+    .wcont-card-title
+*/
+
+
+/*
+#weather-monday-svg
+#weather-monday-circle
+#weather-monday-temp
+
+#weather-tuesday-svg
+#weather-tuesday-circle
+#weather-tuesday-temp
+
+#weather-wednesday-svg
+#weather-wednesday-circle
+#weather-wednesday-temp
+
+#weather-thursday-svg
+#weather-thursday-circle
+#weather-thursday-temp
+
+#weather-friday-svg
+#weather-friday-circle
+#weather-friday-temp
+*/
 
