@@ -57,36 +57,39 @@ function make_temp_obj(timesg, tempsg) {
 function reg_text_insert(day, value) {
     const comp = '[id*=' + day + ']';
     const elm = document.querySelector(comp);
-    elm.innerText = value;
+    elm.innerHTML = value;
 }
 
-function temp_in_html(timesg, tempsg) {
-    let weekdays = {1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday"};
-    let weekends = {"Sundays": 0, "Saturdays": 6};
+function temp_in_html() {
+    const jsong = JSON.parse(this.responseText);
+    const timesg = jsong["hourly"]["time"];
+    const tempsg = jsong["hourly"]["temperature_2m"];
+    const weekdays = {1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday"};
+    const weekends = {"Sundays": 0, "Saturdays": 6};
+    const temp_obj = make_temp_obj(timesg, tempsg);
+
     let newbie_folk = {"Monday": null, "Tuesday": null, "Wednesday": null, "Thursday": null, "Friday": null};
 
-    let temp_obj = make_temp_obj(timesg, tempsg);
 
     for (let key in temp_obj) {
 
         let c_date = new Date(key);
         let day_num = c_date.getDay();
+        let tnum = temp_obj[key];
 
         if (day_num in weekdays) {
-            newbie_folk[weekdays[day_num]] = {"Average": get_average(temp_obj[key]), "Temps": temp_obj[key]};
-            reg_text_insert(weekdays[day_num].toLowerCase(), Math.round(newbie_folk[weekdays[day_num]]["Average"]));
+            const avr = get_average(tnum);
+            newbie_folk[weekdays[day_num]] = {"Average": avr, "Temps": tnum};
+            reg_text_insert(weekdays[day_num].toLowerCase(), Math.round(avr) + '&#176;' ); 
         }
     }
-
-    let monday = document.getElementById("weather-monday");
-    //monday.innerText = Math.round(avg_d25);
-    return newbie_folk;
 }
 
 function main() {
 
     const latit =  '39.6329'
     const longi = '-86.1655'
+
     //          protocol     domain                 suburl
     let murl = 'https://' + 'api.open-meteo.com' + '/v1/forecast' +
                '?latitude='         +           latit  +
@@ -98,12 +101,7 @@ function main() {
 
     req.open(method="GET", URL=murl, ASYNC=true);
 
-    req.onload = function() {
-        let jsong = JSON.parse(this.responseText);
-        let timesg = jsong["hourly"]["time"];
-        let tempsg = jsong["hourly"]["temperature_2m"];
-        temp_in_html(timesg, tempsg);
-    };
+    req.onload = temp_in_html;
 
     req.send();
 }
