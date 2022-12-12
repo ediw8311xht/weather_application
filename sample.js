@@ -54,19 +54,23 @@ function make_temp_obj(timesg, tempsg) {
     return new_object;
 }
 
-function reg_text_insert(day, value) {
-    const comp = '[id*=' + day + ']';
-    const elm = document.querySelector(comp);
-    elm.innerHTML = value;
+function reg_text_insert(day, value, col) {
+    //Elements
+    const temp_comp = document.querySelector( '[id=weather-' + day + '-temp]'   );
+    const svg_comp  = document.querySelector( '[id=weather-' + day + '-svg]'    );
+    const cir_comp  = document.querySelector( '[id=weather-' + day + '-circle]' );
+
+    temp_comp.innerHTML = value;
+    cir_comp.setAttribute("fill", col);
 }
 
 function temp_in_html() {
-    const jsong = JSON.parse(this.responseText);
-    const timesg = jsong["hourly"]["time"];
-    const tempsg = jsong["hourly"]["temperature_2m"];
-    const weekdays = {1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday"};
-    const weekends = {"Sundays": 0, "Saturdays": 6};
-    const temp_obj = make_temp_obj(timesg, tempsg);
+    const jsong     = JSON.parse(this.responseText);
+    const timesg    = jsong["hourly"]["time"];
+    const tempsg    = jsong["hourly"]["temperature_2m"];
+    const weekdays  = {1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday"};
+    const weekends  = {"Sundays": 0, "Saturdays": 6};
+    const temp_obj  = make_temp_obj(timesg, tempsg);
 
     let newbie_folk = {"Monday": null, "Tuesday": null, "Wednesday": null, "Thursday": null, "Friday": null};
 
@@ -79,8 +83,11 @@ function temp_in_html() {
 
         if (day_num in weekdays) {
             const avr = get_average(tnum);
+            const rnded = Math.round(avr);
+            const col = rnded > 2 ? "Yellow" : "Blue";
+
             newbie_folk[weekdays[day_num]] = {"Average": avr, "Temps": tnum};
-            reg_text_insert(weekdays[day_num].toLowerCase(), Math.round(avr) + '&#176;' ); 
+            reg_text_insert(weekdays[day_num].toLowerCase(), rnded.toString() + '&#176;', col); 
         }
     }
 }
