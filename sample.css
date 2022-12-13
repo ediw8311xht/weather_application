@@ -1,88 +1,65 @@
 
-html, body {
-    margin: 0px;
-    padding: 0px;
-    background-color: white;
-    font-family: sans-serif !important;
-    height: 100%;
-}
 
 * {
     font-weight: normal; 
 }
 
-/*
-#wcont { background-color: darkgray; } #wthr-nav { background-color: red; } #wcont-title { background-color: green; } #wcont-main {background-color: blue; }
-*/
-
-/*-----------------------------------> WCONT <----------*/
-
-#wcont {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-
+body {
     padding: 10px 60px 10px 60px;
-    justify-content: space-between;
-    min-height: 80%;
-    max-height: 1200px;
+    background-color: white;
+    font-family: sans-serif !important;
 }
 
-#wcont > * {
-    flex: 1;
-    width: 100%;
+/*-----------------------------------> WCONT <----------*/
+#wcont {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    gap: 20px;
 }
 
 /*-----------------------------------> NAVBAR <---------*/
-
-#wthr-nav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
+.wthr-nav-element {
+    padding: 0px;
+    margin: 0px;
+    grid-row: 1 / 2;
 }
 
 #wthr-nav-title {
+    grid-column: 1 / 4;
 }
 
-#wthr-nav-right {
+.wthr-nav-element:nth-child(2) {
+    grid-column: 4 / 5;
+    text-align: right;
 }
 
-.wthr-nav-element {
-}
-
-#wthr-nav-right .wthr-nav-element {
-    /*justify-content: right;*/
-    display: inline-block;
+.wthr-nav-element:nth-child(3) {
+    grid-column: 5 / 6;          
+    text-align: right;
 }
 
 /*-----------------------------------> TITLE <----------*/
-
 #wcont-title {
+    grid-row: 2 / 3;
+    grid-column: 1 / 6;
+    padding: 0px;
+    text-align: left;
 }
 
 /*-----------------------------------> ELEMENT <--------*/
-
-#wcont-main {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    align-items: center;
-    justify-content: space-between;
+#wcont-container {
+    grid-row: 2 / 3;
+    grid-column: 1 / 6;
 }
-
-.wcont-el {
+#wcont-container-el {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    max-width: 200px;
+    justify-content: space-between;
+    flex: 1;
+    padding: 0px;
 }
 
 .wcont-el-title {
-    text-align: left;
 }
 
 /*-----------------------------------> CARD <-----------*/
@@ -91,8 +68,9 @@ html, body {
     text-align: center;
     border-radius: 24px;
     box-shadow: 0px 5px 5px 2px #DDDDDD;
-    height: 248px;
+    height: 230px;
     width: 206px;
+    margin: 0px;
 }
 
 .wcont-card-title {
@@ -105,21 +83,12 @@ html, body {
 
 
 .wcont-card-svg {
-    height: 58px;
+    text-align: center;
     width: 58px;
+    height: 58px;
 }
 
 .wcont-card-circle {
-    cx: 50%;
-    cy: 50%;
-    r:  50%;
 }
-
-
-
-
-
-
-
 
 
