@@ -9,25 +9,20 @@ body {
     background-color: white;
     font-family: sans-serif !important;
 }
-/*
-#wcont { background-color: darkgray; } #wthr-nav { background-color: red; } #wcont-title { background-color: green; } #wcont-main {background-color: blue; }
-*/
-/*-----------------------------------> WCONT <----------*/
 
+/*-----------------------------------> WCONT <----------*/
 #wcont {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 2fr 1fr 2fr;
+    grid-template-rows: 1fr 2fr 1fr;
     gap: 20px;
 }
 
 /*-----------------------------------> NAVBAR <---------*/
-
 .wthr-nav-element {
-    height: 100%;
     padding: 0px;
     margin: 0px;
-    grid-row: 1;
+    grid-row: 1 / 2;
 }
 
 #wthr-nav-title {
@@ -44,21 +39,20 @@ body {
     text-align: right;
 }
 
-
 /*-----------------------------------> TITLE <----------*/
-
 #wcont-title {
-    grid-row: 2;
+    grid-row: 2 / 3;
     grid-column: 1 / 6;
     padding: 0px;
     text-align: left;
 }
 
 /*-----------------------------------> ELEMENT <--------*/
-
-#wcont-container-el {
-    grid-row: 3;
+#wcont-container {
+    grid-row: 2 / 3;
     grid-column: 1 / 6;
+}
+#wcont-container-el {
     display: flex;
     justify-content: space-between;
     flex: 1;
@@ -95,14 +89,6 @@ body {
 }
 
 .wcont-card-circle {
-    margin: 0 auto;
 }
-
-
-
-
-
-
-
 
 
